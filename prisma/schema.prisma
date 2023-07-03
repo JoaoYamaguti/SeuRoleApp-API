@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["ReferentialActions"]
+
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Establishment {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  rate        Float
+  address     String
+  hours       String
+  images      Image[]
+  categories  Category[]
+
+  @@map("Establishment")
+}
+
+model Image {
+  id              Int            @id @default(autoincrement())
+  path            String
+  Establishment   Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  establishmentId Int?
+}
+
+model Category {
+  id              Int            @id @default(autoincrement())
+  category        String
+  Establishment   Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  establishmentId Int?
+}
