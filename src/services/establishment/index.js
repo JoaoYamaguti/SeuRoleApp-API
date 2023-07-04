@@ -1,6 +1,4 @@
-import { Prisma, PrismaClient } from "@prisma/client";
-import { create } from "domain";
-import path from "path";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
