@@ -9,24 +9,26 @@ import {
 
 const app = express();
 
+app.route('/health').get(async (_, response) => {
+  return response.send('Running...');
+})
+
 app.route("/establishment/create").post(async (request, response) => {
+  console.log(request.body)
   return response.send(await createNewEstablishment(request.body));
 });
 
-app.route("/establishment/findAll").get(async (request, response) => {
+app.route("/establishment/findAll").get(async (_, response) => {
   return response.send(await findEstablishments());
 });
 
-app.route("/establishment/").get(async (request, response) => {
-  console.log(request.body)
-  return response.send(request.body);
-});
-
 app.route("/establishment/delete").delete(async (request, response) => {
-  return response.send(await deleteEstablishment(request.body));
+  const res = await deleteEstablishment(request.headers)
+  console.log(res)
+  return response.send(res);
 });
 
-app.route("/establishment/deleteAll").delete(async (request, response) => {
+app.route("/establishment/deleteAll").delete(async (_, response) => {
   return response.send(await deleteAll());
 });
 

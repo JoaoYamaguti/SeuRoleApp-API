@@ -13,7 +13,7 @@ CREATE TABLE "Image" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "path" TEXT NOT NULL,
     "establishmentId" INTEGER,
-    CONSTRAINT "Image_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT "Image_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -21,5 +21,5 @@ CREATE TABLE "Category" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "category" TEXT NOT NULL,
     "establishmentId" INTEGER,
-    CONSTRAINT "Category_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    CONSTRAINT "Category_establishmentId_fkey" FOREIGN KEY ("establishmentId") REFERENCES "Establishment" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
