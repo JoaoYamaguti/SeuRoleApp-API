@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["ReferentialActions"]
-
 }
 
 datasource db {
@@ -18,11 +17,20 @@ model Establishment {
   description String
   rate        Float
   address     String
-  hours       String
+  hours       Hours[]
   images      Image[]
   categories  Category[]
 
   @@map("Establishment")
+}
+
+model Hours {
+  id              Int            @id @default(autoincrement())
+  weekDay         String
+  open            String
+  close           String
+  Establishment   Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
+  establishmentId Int?
 }
 
 model Image {
@@ -35,6 +43,14 @@ model Image {
 model Category {
   id              Int            @id @default(autoincrement())
   category        String
+  options         String
   Establishment   Establishment? @relation(fields: [establishmentId], references: [id], onDelete: Cascade)
   establishmentId Int?
 }
+
+// model Options {
+//   id         Int       @id @default(autoincrement())
+//   option     String
+//   Category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+//   categoryId Int?
+// }

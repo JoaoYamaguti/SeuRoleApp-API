@@ -12,4 +12,4 @@ app.use(express.json())
 
 app.use('/', routes)
 
-app.listen(port, () => console.log('Rodando...'))
+app.listen(port, () => console.log(`Rodando na porta ${port}`))
