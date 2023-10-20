@@ -22,7 +22,11 @@ export const createNewEstablishment = async (resData) => {
 
 export const findEstablishments = async () => {
   const dados = await prisma.establishment.findMany({
-    include: { hours:true, images: true, categories: true },
+    include: {
+      hours: { select: { weekDay: true, open: true, close: true } },
+      images: { select: { path: true } },
+      categories: {select:{category:true, options:true}},
+    },
   });
 
   return dados;

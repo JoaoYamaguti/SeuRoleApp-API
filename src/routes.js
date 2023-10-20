@@ -24,7 +24,6 @@ app.route("/establishment/findAll").get(async (_, response) => {
 
 app.route("/establishment/delete").delete(async (request, response) => {
   const res = await deleteEstablishment(request.headers)
-  console.log(res)
   return response.send(res);
 });
 
